@@ -1,8 +1,10 @@
+//make a call to the USGS website to get data for 7 days of earthquakes
 var quakeJSON_url = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson"
 d3.json(quakeJSON_url, function(data) {
     createFeatures(data.features);
 });
 
+//create a function that we can pass in our leaflet map layers
 function createMap(equakes) {
 
     var map = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
@@ -54,6 +56,7 @@ function createMap(equakes) {
   
   
 };
+//create a function that will give the information in the popup when you click on the circle
 function createFeatures(quakes) {
     function onEachFeature(feature, layer) {
         layer.bindPopup("<h4 style = 'text-align:center;'>" + new Date(feature.properties.time) + //https://stackoverflow.com/questions/1646698/what-is-the-new-keyword-in-javascript
